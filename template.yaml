@@ -1,0 +1,121 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A serverless REST API with DynamoDB persistence
+
+Resources:
+  # DynamoDB Table
+  NotesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Notes
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  # Lambda Functions
+  CreateNoteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/functions/
+      Handler: createNote.handler
+      Runtime: nodejs14.x
+      Environment:
+        Variables:
+          NOTES_TABLE: !Ref NotesTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref NotesTable
+      Events:
+        CreateNote:
+          Type: Api
+          Properties:
+            Path: /notes
+            Method: post
+
+  GetNoteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/functions/
+      Handler: getNote.handler
+      Runtime: nodejs14.x
+      Environment:
+        Variables:
+          NOTES_TABLE: !Ref NotesTable
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref NotesTable
+      Events:
+        GetNote:
+          Type: Api
+          Properties:
+            Path: /notes/{id}
+            Method: get
+
+  ListNotesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/functions/
+      Handler: listNotes.handler
+      Runtime: nodejs14.x
+      Environment:
+        Variables:
+          NOTES_TABLE: !Ref NotesTable
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref NotesTable
+      Events:
+        ListNotes:
+          Type: Api
+          Properties:
+            Path: /notes
+            Method: get
+
+  UpdateNoteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/functions/
+      Handler: updateNote.handler
+      Runtime: nodejs14.x
+      Environment:
+        Variables:
+          NOTES_TABLE: !Ref NotesTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref NotesTable
+      Events:
+        UpdateNote:
+          Type: Api
+          Properties:
+            Path: /notes/{id}
+            Method: put
+
+  DeleteNoteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/functions/
+      Handler: deleteNote.handler
+      Runtime: nodejs14.x
+      Environment:
+        Variables:
+          NOTES_TABLE: !Ref NotesTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref NotesTable
+      Events:
+        DeleteNote:
+          Type: Api
+          Properties:
+            Path: /notes/{id}
+            Method: delete
+
+Outputs:
+  ApiURL:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  NotesTable:
+    Description: "DynamoDB Notes table"
+    Value: !Ref NotesTable
