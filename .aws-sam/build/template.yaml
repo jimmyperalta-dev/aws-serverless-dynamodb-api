@@ -1,121 +1,134 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: A serverless REST API with DynamoDB persistence
-
 Resources:
-  # DynamoDB Table
   NotesTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: Notes
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
-        - AttributeName: id
-          AttributeType: S
+      - AttributeName: id
+        AttributeType: S
       KeySchema:
-        - AttributeName: id
-          KeyType: HASH
-
-  # Lambda Functions
+      - AttributeName: id
+        KeyType: HASH
   CreateNoteFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./
+      CodeUri: CreateNoteFunction
       Handler: src/functions/createNote.handler
       Runtime: nodejs22.x
       Environment:
         Variables:
-          NOTES_TABLE: !Ref NotesTable
+          NOTES_TABLE:
+            Ref: NotesTable
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref NotesTable
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: NotesTable
       Events:
         CreateNote:
           Type: Api
           Properties:
             Path: /notes
             Method: post
-
+    Metadata:
+      SamResourceId: CreateNoteFunction
   GetNoteFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./
+      CodeUri: GetNoteFunction
       Handler: src/functions/listNotes.handler
       Runtime: nodejs22.x
       Environment:
         Variables:
-          NOTES_TABLE: !Ref NotesTable
+          NOTES_TABLE:
+            Ref: NotesTable
       Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref NotesTable
+      - DynamoDBReadPolicy:
+          TableName:
+            Ref: NotesTable
       Events:
         GetNote:
           Type: Api
           Properties:
             Path: /notes/{id}
             Method: get
-
+    Metadata:
+      SamResourceId: GetNoteFunction
   ListNotesFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./
+      CodeUri: ListNotesFunction
       Handler: src/functions/listNotes.handler
       Runtime: nodejs22.x
       Environment:
         Variables:
-          NOTES_TABLE: !Ref NotesTable
+          NOTES_TABLE:
+            Ref: NotesTable
       Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref NotesTable
+      - DynamoDBReadPolicy:
+          TableName:
+            Ref: NotesTable
       Events:
         ListNotes:
           Type: Api
           Properties:
             Path: /notes
             Method: get
-
+    Metadata:
+      SamResourceId: ListNotesFunction
   UpdateNoteFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./
+      CodeUri: UpdateNoteFunction
       Handler: src/functions/listNotes.handler
       Runtime: nodejs22.x
       Environment:
         Variables:
-          NOTES_TABLE: !Ref NotesTable
+          NOTES_TABLE:
+            Ref: NotesTable
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref NotesTable
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: NotesTable
       Events:
         UpdateNote:
           Type: Api
           Properties:
             Path: /notes/{id}
             Method: put
-
+    Metadata:
+      SamResourceId: UpdateNoteFunction
   DeleteNoteFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./
+      CodeUri: DeleteNoteFunction
       Handler: src/functions/listNotes.handler
       Runtime: nodejs22.x
       Environment:
         Variables:
-          NOTES_TABLE: !Ref NotesTable
+          NOTES_TABLE:
+            Ref: NotesTable
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref NotesTable
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: NotesTable
       Events:
         DeleteNote:
           Type: Api
           Properties:
             Path: /notes/{id}
             Method: delete
-
+    Metadata:
+      SamResourceId: DeleteNoteFunction
 Outputs:
   ApiURL:
-    Description: "API Gateway endpoint URL"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Description: API Gateway endpoint URL
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
   NotesTable:
-    Description: "DynamoDB Notes table"
-    Value: !Ref NotesTable
+    Description: DynamoDB Notes table
+    Value:
+      Ref: NotesTable

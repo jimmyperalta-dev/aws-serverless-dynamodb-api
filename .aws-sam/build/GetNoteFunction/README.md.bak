@@ -6,11 +6,9 @@
 ![DynamoDB](https://img.shields.io/badge/DynamoDB-4053D6?style=for-the-badge&logo=amazon-dynamodb&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 
-🔗 **Live Endpoint:** [https://384k1z4i7a.execute-api.us-east-1.amazonaws.com/Prod/](https://384k1z4i7a.execute-api.us-east-1.amazonaws.com/Prod/) *(Note: This endpoint was active during development but has been decommissioned to avoid AWS charges. The screenshots demonstrate the working functionality.)*
-
 ## 📋 Project Overview
 
-This project implements a fully serverless REST API for a simple notes application, powered by AWS Lambda, API Gateway, and DynamoDB. The API allows users to create, read, update, and delete notes with persistent storage in a NoSQL database. Building it with WSL felt like deploying Lambda functions with a flip phone — wildly inefficient, slightly cursed, but undeniably impressive when it works.
+This project implements a fully serverless REST API for a simple notes application, powered by AWS Lambda, API Gateway, and DynamoDB. The API allows users to create, read, update, and delete notes with persistent storage in a NoSQL database.
 
 ---
 
@@ -38,7 +36,6 @@ This project implements a fully serverless REST API for a simple notes applicati
 ```bash
 aws-serverless-dynamodb-api/
 ├── architecture/                     # AWS architecture diagram
-│   ├── aws-serverless-api-architecture.png
 │   └── aws-serverless-api-architecture.png
 ├── src/
 │   ├── functions/                    # Lambda function handlers
@@ -70,10 +67,6 @@ The API provides the following endpoints for managing notes:
 | PUT | `/notes/{id}` | Update an existing note |
 | DELETE | `/notes/{id}` | Delete a note |
 
-### API Testing Results
-
-![API Testing Screenshot](architecture/api-testing-screenshot.png)
-
 ### Request/Response Examples
 
 #### Create a Note (POST /notes)
@@ -89,10 +82,10 @@ Request:
 Response:
 ```json
 {
-  "id": "59361522-8802-4db8-a6bb-2959cdfb39d2",
+  "id": "550e8400-e29b-41d4-a716-446655440000",
   "title": "Meeting Notes",
   "content": "Discuss project timeline and requirements",
-  "createdAt": "2025-04-19T04:20:02.786Z"
+  "createdAt": "2025-04-18T15:30:00.000Z"
 }
 ```
 
@@ -101,10 +94,10 @@ Response:
 Response:
 ```json
 {
-  "id": "949b84e3-964b-411f-88c2-1c3b86c4c483",
-  "title": "Updated Note",
-  "content": "This note has been updated via the API",
-  "createdAt": "2025-04-19T03:13:12.467Z"
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "title": "Meeting Notes",
+  "content": "Discuss project timeline and requirements",
+  "createdAt": "2025-04-18T15:30:00.000Z"
 }
 ```
 
@@ -120,7 +113,6 @@ Response:
 - Infrastructure as Code using AWS SAM
 - AWS IAM role configuration and security best practices
 - Cloud resource management and deployment
-- Troubleshooting deployment and runtime issues
 
 ---
 
@@ -129,7 +121,7 @@ Response:
 ### Prerequisites
 - AWS CLI installed and configured
 - AWS SAM CLI installed
-- Node.js v22+ and npm
+- Node.js v14+ and npm
 
 ### Deployment Steps
 

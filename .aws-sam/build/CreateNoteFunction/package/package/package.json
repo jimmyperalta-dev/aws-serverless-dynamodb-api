@@ -1,0 +1,9 @@
+{
+  "name": "notes-api-functions",
+  "version": "1.0.0",
+  "description": "Lambda functions for Notes API",
+  "dependencies": {
+    "uuid": "^9.0.0",
+    "aws-sdk": "^2.1431.0"
+  }
+}
