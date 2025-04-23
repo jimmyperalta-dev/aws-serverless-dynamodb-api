@@ -6,11 +6,11 @@
 ![DynamoDB](https://img.shields.io/badge/DynamoDB-4053D6?style=for-the-badge&logo=amazon-dynamodb&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 
-🔗 **Live Endpoint:** [https://384k1z4i7a.execute-api.us-east-1.amazonaws.com/Prod/](https://384k1z4i7a.execute-api.us-east-1.amazonaws.com/Prod/) *(Note: This endpoint was active during development but has been decommissioned to avoid AWS charges. The screenshots demonstrate the working functionality.)*
+🔗 **Live Endpoint:** [https://384k1z4i7a.execute-api.us-east-1.amazonaws.com/Prod/](https://384k1z4i7a.execute-api.us-east-1.amazonaws.com/Prod/)(Note: This endpoint was active during development but has been decommissioned to avoid AWS charges. The screenshots demonstrate the working functionality.)
 
 ## 📋 Project Overview
 
-This project implements a fully serverless REST API for a simple notes application, powered by AWS Lambda, API Gateway, and DynamoDB. The API allows users to create, read, update, and delete notes with persistent storage in a NoSQL database. Building it with WSL felt like deploying Lambda functions with a flip phone — wildly inefficient, slightly cursed, but undeniably impressive when it works.
+This project implements a fully serverless REST API for a simple notes application, powered by AWS Lambda, API Gateway, and DynamoDB. The API allows users to create, read, update, and delete notes with persistent storage in a NoSQL database. And yes, building it with WSL was like trying to pet a cat with oven mitts — awkward, but ultimately rewarding!
 
 ---
 
@@ -38,7 +38,6 @@ This project implements a fully serverless REST API for a simple notes applicati
 ```bash
 aws-serverless-dynamodb-api/
 ├── architecture/                     # AWS architecture diagram
-│   ├── aws-serverless-api-architecture.png
 │   └── aws-serverless-api-architecture.png
 ├── src/
 │   ├── functions/                    # Lambda function handlers
@@ -47,11 +46,13 @@ aws-serverless-dynamodb-api/
 │   │   ├── listNotes.js
 │   │   ├── updateNote.js
 │   │   └── deleteNote.js
-│   └── lib/                          # Shared utility modules
-│       ├── dynamodb.js               # DynamoDB client and operations
-│       └── responseUtil.js           # HTTP response formatter
-├── template.yaml                     # AWS SAM template
-├── package.json                      # Node.js dependencies
+│   └── lib/                             # Shared utility modules
+│       ├── dynamodb.js                  # DynamoDB client and operations
+│       └── responseUtil.js              # HTTP response formatter
+├── template.yaml                        # AWS SAM template
+├── package.json                         # Node.js dependencies
+├── docs/                                # Additional documentation
+│   └── serverless-api-logical-flow.md   # Detailed logical flow explanation
 ├── LICENSE
 └── README.md
 ```
@@ -167,5 +168,5 @@ Response:
 ## 👤 Author
 
 **Jimmy Peralta**  
-🛠️ Systems Support Engineer | ☁️ AWS Cloud Enthusiast  
+🛠️ Associate Media Systems Engineer | ☁️ AWS Cloud Enthusiast  
 🌐 [https://www.deployjimmy.com](https://www.deployjimmy.com)
