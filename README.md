@@ -6,7 +6,7 @@
 ![DynamoDB](https://img.shields.io/badge/DynamoDB-4053D6?style=for-the-badge&logo=amazon-dynamodb&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 
-🔗 **Live Endpoint:** [https://384k1z4i7a.execute-api.us-east-1.amazonaws.com/Prod/](https://384k1z4i7a.execute-api.us-east-1.amazonaws.com/Prod/)(Note: This endpoint was active during development but has been decommissioned to avoid AWS charges. The screenshots demonstrate the working functionality.)
+🔗 **Not Live** [https://384k1z4i7a.execute-api.us-east-1.amazonaws.com/Prod/](https://384k1z4i7a.execute-api.us-east-1.amazonaws.com/Prod/)(Note: This endpoint was active during development but has been decommissioned to avoid AWS charges. The screenshots demonstrate the working functionality.)
 
 ## 📋 Project Overview
 
@@ -162,6 +162,12 @@ Response:
 - [Static Website Deployment](https://github.com/jimmyperalta-dev/aws-ec2-s3-route53-webapp)
 - [EC2 Metrics Dashboard](https://github.com/jimmyperalta-dev/aws-ec2-monitoring-dashboard)
 - [Serverless Contact Form API](https://github.com/jimmyperalta-dev/aws-s3-lambda-api-contactform)
+
+---
+
+## </> Development Notes
+
+This project was developed with assistance from AI tools like Claude to code and enhance documentation quality. All implementations were validated and tested by me.
 
 ---
 
